@@ -14,7 +14,6 @@ function randomPassword() {
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 	$email = trim($_POST['email']);
-	$new_pass = randomPassword();
 	if(empty($email)){
 		$error .='<p class="error">Please enter email.</p>';
 	}

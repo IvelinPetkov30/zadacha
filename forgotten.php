@@ -54,6 +54,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
 ?>
 
+<script>
+let captcha;
+function generate() {
+    document.getElementById("cap").value = "";
+    captcha = document.getElementById("image");
+    let uniquechar = "";
+    const randomchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (let i = 1; i < 5; i++) {
+        uniquechar += randomchar.charAt(
+            Math.random() * randomchar.length)
+    }
+    captcha.innerHTML = uniquechar;
+}
+
+function printmsg() {
+    const usr_input = document
+        .getElementById("cap").value;
+
+    if (usr_input == captcha.innerHTML) {
+		alert("Hello\nHow are you?");
+        let s = document.getElementById("key")
+            .innerHTML = "Matched";
+        generate();
+    }
+    else {
+        let s = document.getElementById("key")
+            .innerHTML = "not Matched";
+        generate();
+    }
+}
+</script>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,6 +110,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 					<label>Email address</label>
 					<input type="email" name="email" class="form-control" required/>
 				</div>
+				<div id="user-input" class="form-group">
+					<input type="text" name="submit1" id="cap" placeholder="Captcha code" />
+				</div>
+ 				<div class="form-group" onclick="generate()">
+					<i class="fas fa-sync">
+					</i>
+				</div>
+ 						<div id="image" name="captc" class="form-group" selectable="False"></div>
 				<div class="form-group">
 					<input type="submit" name="submit" class="btn btn-primary" value="Submit">
 				</div>
